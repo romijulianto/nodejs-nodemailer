@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pertamina</title>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/vue"></script>
+    <!-- Would use latest version, you'd better specify a version -->
+    <script src="https://unpkg.com/naive-ui"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .n-layout {
+        max-width: 500px;
+        left: 30vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <n-layout embedded content-style="padding: 24px;">
+        <n-card title="Notification">
+          <template #cover>
+            <div class="p-4"><img
+              src="https://pertamina.com/landing/images/logo.png"
+              alt="logo"
+              height="50px"
+              width="30px"
+            />
+        </div>
+            
+          </template>
+          <template #header-extra class=""> IEDCC @2024 </template>
+          <div class="text-md font-italic underline">Please do not reply, this automated notification email</div>
+        </n-card>
+      </n-layout>
+    </div>
+    <script>
+      const App = {
+        setup() {
+          return {
+            message: "naive",
+          };
+        },
+      };
+      const app = Vue.createApp(App);
+      app.use(naive);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
