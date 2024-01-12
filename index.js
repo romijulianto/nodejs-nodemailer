@@ -14,21 +14,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* TODO: add mailserver */
-// const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//         user: `${process.env.GOOGLE_ACCOUNT}`,
-//         pass: `${process.env.GOOGLE_PASSWORD}`,
-//     },
-// });
+const transporterGmail = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: `${process.env.GOOGLE_ACCOUNT}`,
+        pass: `${process.env.GOOGLE_PASSWORD}`,
+    },
+});
 
-const transporter = nodemailer.createTransport({
+const transporterOutlook = nodemailer.createTransport({
     host: 'smtp.office365.com',
     port: 587,
     secure: false,
     auth: {
-        user: 'romi.julianto@elnusa.co.id',
-        pass: '8&Jv61U3Y',
+        user: `${process.env.OUTLOOK_ACCOUNT}`,
+        pass: `${process.env.OUTLOOK_PASSWORD}`,
     },
 });
 
@@ -47,7 +47,15 @@ const mailOptions = {
     ],
 };
 
-transporter.sendMail(mailOptions, (error, info) => {
+transporterGmail.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        console.error('Error sending email:', error);
+    } else {
+        console.log('Email sent:', info.response);
+    }
+});
+
+transporterOutlook.sendMail(mailOptions, (error, info) => {
     if (error) {
         console.error('Error sending email:', error);
     } else {
